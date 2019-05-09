@@ -1,16 +1,15 @@
 const canPlaceFlowers = (flowerbed, n) => {
-  // 用1打散数组 [0, 0, 1, 0, 0] 打散成 [0, 0] [0, 0]
-  const arrs = flowerbed
-    .join('')
-    .split(1)
-    .filter(v => v !== '')
-  return arrs
-  const canUse = Math.ceil(flowerbed.length / 2)
-  const has = flowerbed.filter(v => {
-    return v === 1
-  }).length
-  return has + n <= canUse
+  for (let i=0,il=flowerbed.length; i<il; i++) {
+    if (!flowerbed[i] && !flowerbed[i-1] && !flowerbed[i+1]) {
+      flowerbed[i] = 1;
+      // i++
+      n--
+    }
+  }
+  return n <= 0
 }
 
-const res = canPlaceFlowers([1, 0, 0, 0, 1], 1)
-console.log('res', res)
+// const res = canPlaceFlowers([0, 1, 0, 0], 1)
+// console.log(res)
+
+export default canPlaceFlowers;
